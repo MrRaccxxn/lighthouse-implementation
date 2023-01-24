@@ -1,5 +1,4 @@
-import classNames from "classnames"
-import { useAccount, useBalance, useConnect } from "wagmi";
+import { useConnect } from "wagmi";
 
 export const ConnectWallet = () => {
     const { connectors, isLoading, connect, error, pendingConnector } = useConnect()

@@ -1,31 +1,20 @@
-import { SBTContractAbi } from "@/common/contracts/abi/SBT";
-import ClientRehydration from "@/common/utils/ClientRehydration";
 import _ from "lodash";
-import { useAccount, useContractRead, usePrepareContractWrite } from "wagmi";
-
-interface ISoul {
-    identity: string;
-    url: string;
-    score: number;
-    timestamp: number;
-}
+import { SBTContractAbi } from "@/common/contracts/abi/SBT";
+import { useAccount, useContractRead } from "wagmi";
 
 export const Home = () => {
     const { isConnected } = useAccount();
     const { address } = useAccount();
 
-    const { data, isLoading } = useContractRead({
+    const { data } = useContractRead({
         address: `0x${process.env.NEXT_PUBLIC_SBT_CONTRACT_ADDRESS}`,
         abi: SBTContractAbi,
         functionName: 'getSoul',
         args: [address],
     });
 
-    console.log(data)
     let output = Object.values(data || {});
     if (output[0] === '') output = [];
-
-    // const { identity = 'No identity', score = 'No score', url = 'No url', timestamp = 'No timestamp' } = data as ISoul;
 
     return <div className="hero min-h-screen" style={{ backgroundImage: `url("/assets/illustrations/alexandria.jpg")` }}>
         <div className="hero-overlay bg-opacity-60"></div>
