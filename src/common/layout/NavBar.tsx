@@ -1,48 +1,45 @@
 import _ from "lodash";
-import classNames from "classnames";
-import { useWeb3Auth } from "../context/web3AuthContext";
 import Image from "next/image";
+import { useAccount, useDisconnect } from 'wagmi'
+import { ConnectWallet } from "../components/ConnectWallet";
+import ClientRehydration from "../utils/ClientRehydration";
 
 export const NavBar = () => {
-    const { publicKey, login, logout, isLoading } = useWeb3Auth()
+    const { address, isConnected } = useAccount()
+    const { disconnect } = useDisconnect()
 
-    const handleLogin = async () => {
-        await login();
-    }
+    return <ClientRehydration>
+        <div className="navbar bg-base-100">
+            <div className="flex-1">
+                <a className="btn btn-ghost normal-case text-xl">Logo</a>
+            </div>
 
-    return <div className="navbar bg-base-100">
-        <div className="flex-1">
-            <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
-        </div>
-
-        {
-            _.isEmpty(publicKey) ?
-                (
-                    <button className={classNames([
-                        'btn',
-                        isLoading ? '' : '',
-                    ])} onClick={handleLogin}>Login</button>
-                )
-                :
-                (
-                    <button onClick={logout}>
-                        <div className="flex flex-row gap-3 items-center">
-                            <div className="avatar">
-                                <div className="w-10 rounded-full">
-                                    <Image src="/assets/illustrations/raccoon.png" alt="avatar" width={40} height={40} />
+            {
+                !isConnected ?
+                    (
+                        <ConnectWallet />
+                    )
+                    :
+                    (
+                        <div onClick={() => disconnect()} className='cursor-pointer'>
+                            <div className="flex flex-row gap-3 items-center">
+                                <div className="avatar">
+                                    <div className="w-10 rounded-full">
+                                        <Image src="/assets/illustrations/raccoon.png" alt="avatar" width={40} height={40} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="font-medium">
-                                <div className="text-white">
-                                    {publicKey.slice(0, 5) + '...' + publicKey.slice(publicKey.length - 5, publicKey.length)}
-                                </div>
-                                <div className="text-sm text-gray-500 dark:text-gray-400">
-                                    Dungeon Master
+                                <div className="font-medium">
+                                    <div className="text-white">
+                                        {address?.slice(0, 5) + '...' + address?.slice(address.length - 5, address.length)}
+                                    </div>
+                                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                                        A Dump Raccoon
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </button>
-                )
-        }
-    </div>
+                    )
+            }
+        </div>
+    </ClientRehydration>
 }

@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: [
-    '@web3auth/web3auth-wagmi-connector',
-  ],
+  swcMinify: true,
+  experimental: {
+    appDir: true,
+  },
 }
 
 module.exports = nextConfig
