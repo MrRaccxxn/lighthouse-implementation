@@ -1,6 +1,7 @@
 import _ from "lodash";
 import classNames from "classnames";
 import { useWeb3Auth } from "../context/web3AuthContext";
+import Image from "next/image";
 
 export const NavBar = () => {
     const { publicKey, login, logout, isLoading } = useWeb3Auth()
@@ -28,7 +29,7 @@ export const NavBar = () => {
                         <div className="flex flex-row gap-3 items-center">
                             <div className="avatar">
                                 <div className="w-10 rounded-full">
-                                    <img src="https://placeimg.com/192/192/people" />
+                                    <Image src="/assets/illustrations/raccoon.png" alt="avatar" width={40} height={40} />
                                 </div>
                             </div>
                             <div className="font-medium">

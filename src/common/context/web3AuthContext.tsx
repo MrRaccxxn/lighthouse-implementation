@@ -11,11 +11,19 @@ import { CHAIN_CONFIG, CHAIN_CONFIG_TYPE } from "../@types/web3Auth/chainConfigu
 import { WEB3AUTH_NETWORK_TYPE } from "../@types/web3Auth/web3AuthNetworks";
 import { getWalletProvider, IWalletProvider } from "../core/clients/web3auth/walletProvider";
 import _ from 'lodash'
+import { createClient, configureChains } from "wagmi";
+import { filecoinHyperspace } from 'wagmi/chains';
+import { publicProvider } from '@wagmi/core/providers/public';
+import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
+import { InjectedConnector } from "wagmi/connectors/injected";
+//Web3AuthConnector has build problems, so its neccesary to transpile it and use the .esm
+const { Web3AuthConnector } = require('@web3auth/web3auth-wagmi-connector/dist/web3authWagmiConnector.esm');
 
 const web3AuthClientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID || '';
 
 export const web3AuthContext = createContext<IWeb3AuthContext>({
     web3Auth: null,
+    wagmiClient: null,
     provider: null,
     isLoading: false,
     user: {},
@@ -50,6 +58,7 @@ interface Iweb3AuthProps {
 
 export const Web3AuthProvider: FunctionComponent<Iweb3AuthState> = ({ children, web3AuthNetwork, chain }: Iweb3AuthProps) => {
     const [web3Auth, setweb3Auth] = useState<Web3Auth | null>(null);
+    const [wagmiClient, setWagmiClient] = useState<any | null>(null);
     const [provider, setProvider] = useState<IWalletProvider | null>(null);
     const [user, setUser] = useState<Partial<OpenloginUserInfo> | {}>({});
     const [publicKey, setPublicKey] = useState<string>('');
@@ -96,6 +105,15 @@ export const Web3AuthProvider: FunctionComponent<Iweb3AuthState> = ({ children, 
         async function init() {
             try {
                 setIsLoading(true);
+
+
+                const { chains, provider, webSocketProvider } = configureChains([filecoinHyperspace], [jsonRpcProvider({
+                    rpc: () => ({
+                        http: process.env.NEXT_PUBLIC_HYPERSPACE_RCP || '',
+                    }),
+                    priority: 0,
+                }), publicProvider({ priority: 1 })]);
+
                 const web3AuthInstance = new Web3Auth({
                     web3AuthNetwork: 'testnet',
                     chainConfig: currentChainConfig,
@@ -145,6 +163,31 @@ export const Web3AuthProvider: FunctionComponent<Iweb3AuthState> = ({ children, 
                     }
                 });
                 setweb3Auth(web3AuthInstance);
+
+                const wagmiClientInstance = createClient({
+                    autoConnect: true,
+                    connectors: [
+                        new Web3AuthConnector({
+                            chains,
+                            options: {
+                                web3AuthInstance,
+                            },
+                        }),
+                        new InjectedConnector({
+                            chains,
+                            options: {
+                                name: "Injected",
+                                shimDisconnect: true,
+                            },
+                        }),
+                    ],
+                    provider,
+                    webSocketProvider
+                });
+
+                setweb3Auth(web3AuthInstance);
+                setWagmiClient(wagmiClientInstance);
+
                 setWeb3Authinit(true);
             } catch (error) {
                 console.error(error);
@@ -248,6 +291,7 @@ export const Web3AuthProvider: FunctionComponent<Iweb3AuthState> = ({ children, 
 
     return <web3AuthContext.Provider value={{
         web3Auth,
+        wagmiClient,
         chain,
         provider,
         user,

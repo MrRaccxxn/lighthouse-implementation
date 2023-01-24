@@ -4,12 +4,13 @@ import { Web3Auth } from "@web3auth/modal";
 
 export interface IWeb3AuthContext {
     web3Auth: Web3Auth | null;
+    wagmiClient: any | null;
     provider: IWalletProvider | null;
     isLoading: boolean;
     setIsLoading: (loading: boolean) => void;
+    chain: string;
     user: Partial<OpenloginUserInfo>;
     publicKey: string;
-    chain: string;
     isWeb3AuthInit: boolean;
     login: () => Promise<void>;
     logout: () => Promise<void>;
