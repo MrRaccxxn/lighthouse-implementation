@@ -13,6 +13,8 @@ export const Home = () => {
         args: [address],
     });
 
+    debugger;
+
     let output = Object.values(data || {});
     if (output[0] === '') output = [];
 
