@@ -9,9 +9,9 @@ export const NavBar = () => {
     const { disconnect } = useDisconnect()
 
     return <ClientRehydration>
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-transparent">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl">Logo</a>
+                <a className="btn btn-ghost normal-case text-xl">SoulSci</a>
             </div>
 
             {

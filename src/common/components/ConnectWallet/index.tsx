@@ -4,7 +4,7 @@ export const ConnectWallet = () => {
     const { connectors, isLoading, connect, error, pendingConnector } = useConnect()
 
     return <>
-        <label htmlFor="my-modal" className="btn">open modal</label>
+        <label htmlFor="my-modal" className="btn">Login</label>
         <input type="checkbox" id="my-modal" className="modal-toggle" />
 
         <div className="modal">
