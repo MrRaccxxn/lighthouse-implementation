@@ -84,7 +84,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 | Adarsh Chandran | your_social_link |
 | Sandra Ashipala | https://github.com/sandramsc |
 | Joseph Mello | your_social_link |
-| Yuichi Okuhama |  your_social_link |
+| Yuichi Okuhama |  https://github.com/yuichi-9621 |
 | your_name | your_social_link |
 
 ## License
