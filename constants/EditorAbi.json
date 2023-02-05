@@ -1,0 +1,28 @@
+[
+    { "type": "constructor", "payable": false, "inputs": [] },
+    {
+        "type": "function",
+        "name": "mintID",
+        "constant": false,
+        "payable": false,
+        "inputs": [{ "type": "string", "name": "uri" }],
+        "outputs": []
+    },
+    {
+        "type": "function",
+        "name": "mintPaper",
+        "constant": false,
+        "payable": false,
+        "inputs": [{ "type": "string", "name": "uri" }],
+        "outputs": []
+    },
+    {
+        "type": "function",
+        "name": "sbtType",
+        "constant": true,
+        "stateMutability": "view",
+        "payable": false,
+        "inputs": [{ "type": "address" }],
+        "outputs": [{ "type": "uint8" }]
+    }
+]
