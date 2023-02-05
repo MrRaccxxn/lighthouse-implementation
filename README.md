@@ -81,11 +81,10 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 | Name            | Link                                   |
 | --------------- | -------------------------------------- |
 | Ayrton Paredes | https://github.com/MrRaccxxn |
-| Adarsh Chandran | your_social_link |
+| Adarsh Chandran | https://github.com/adarshsc2000 |
 | Sandra Ashipala | https://github.com/sandramsc |
 | Joseph Mello | your_social_link |
 | Yuichi Okuhama |  https://github.com/yuichi-9621 |
-| your_name | your_social_link |
 
 ## License
 
