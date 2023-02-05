@@ -45,7 +45,7 @@ export const MessageSection = () => {
                         <div className="flex justify-between items-center ">
                             <div className="flex space-x-4 items-center">
                                 <div className="h-12 w-12 rounded-full overflow-hidden">
-                                    <img src="https://bit.ly/2KfKgdy" loading="lazy" className="h-full w-full object-cover" />
+                                    <img alt="image" src="https://bit.ly/2KfKgdy" loading="lazy" className="h-full w-full object-cover" />
                                 </div>
                                 <div className="flex flex-col">
                                     <h3 className="font-semibold text-lg">Your name</h3>
@@ -57,7 +57,7 @@ export const MessageSection = () => {
                             <div className="chat chat-start">
                                 <div className="chat-image avatar">
                                     <div className="w-10 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" />
+                                        <img alt="image" src="https://placeimg.com/192/192/people" />
                                     </div>
                                 </div>
                                 <div className="chat-header">
@@ -71,7 +71,7 @@ export const MessageSection = () => {
                             <div className="chat chat-end">
                                 <div className="chat-image avatar">
                                     <div className="w-10 rounded-full">
-                                        <img src="https://placeimg.com/192/192/people" />
+                                        <img alt="image" src="https://placeimg.com/192/192/people" />
                                     </div>
                                 </div>
                                 <div className="chat-header">
@@ -88,7 +88,7 @@ export const MessageSection = () => {
                             <div className="flex items-center justify-between p-2">
                                 <button className="h-6 w-6 text-gray-400">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                             d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                                     </svg>
                                 </button>

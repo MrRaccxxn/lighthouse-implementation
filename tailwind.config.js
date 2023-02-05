@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-   
+    daisyui: {
+      themes: [
+        'emerald'
+      ],
+    },
     screens: {
       'xl': { 'max': '1279px' },
       // => @media (max-width: 1279px) { ... }
@@ -26,6 +30,16 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2rem',
+      },
+      colors: {
+        white: '#fff',
+        blue: "#04d9ff",
+        primary: "#191d26",
+        primaryColor: "#00040f",
+        secondaryColor: "#00f6ff",
+        secondaryColor_green: '#c2f70f',
+        primaryColor_orange: '#ff9f00',
+        secondaryColor_orange: '#fe7a15',
       },
     },
     extend: {},
