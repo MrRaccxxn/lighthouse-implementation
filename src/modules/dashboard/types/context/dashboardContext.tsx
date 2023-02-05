@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction } from "react";
 export interface DashboardContextInterface {
     dashboardSection: DashboardSectionType;
     setDashboardSection: Dispatch<SetStateAction<DashboardSectionType>>;
+    requireOnboarding: boolean;
+    setRequireOnboarding: Dispatch<SetStateAction<boolean>>;
 }
 
 export enum DashboardSectionType {

@@ -10,10 +10,10 @@ export const ResumeSection = () => {
                             <div className="h-100 border-l mx-4"></div>
                             <div className="flex flex-nowrap -space-x-3">
                                 <div className="h-9 w-9">
-                                    <img className="object-cover w-full h-full rounded-full" src="https://ui-avatars.com/api/?background=random" />
+                                    <img alt="avatar" className="object-cover w-full h-full rounded-full" src="https://ui-avatars.com/api/?background=random" />
                                 </div>
                                 <div className="h-9 w-9">
-                                    <img className="object-cover w-full h-full rounded-full" src="https://ui-avatars.com/api/?background=random" />
+                                    <img alt="avatar" className="object-cover w-full h-full rounded-full" src="https://ui-avatars.com/api/?background=random" />
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ export const ResumeSection = () => {
                                         <div className="text-gray-400 text-xs">User name</div>
                                         <div className="text-gray-400 text-xs">4h</div>
                                     </div>
-                                    <a href="javascript:void(0)" className="font-bold hover:text-yellow-800 hover:underline">Blog and social posts</a>
+                                    <a href="#" className="font-bold hover:text-yellow-800 hover:underline">Blog and social posts</a>
                                     <div className="text-sm text-gray-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="text-gray-800 inline align-middle mr-1" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
@@ -78,7 +78,7 @@ export const ResumeSection = () => {
                                         <div className="text-gray-400 text-xs">User name</div>
                                         <div className="text-gray-400 text-xs">7d</div>
                                     </div>
-                                    <a href="javascript:void(0)" className="font-bold hover:text-yellow-800 hover:underline">New campaign review</a>
+                                    <a href="#" className="font-bold hover:text-yellow-800 hover:underline">New campaign review</a>
                                     <div className="text-sm text-gray-600">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" className="text-gray-800 inline align-middle mr-1" viewBox="0 0 16 16">
                                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
@@ -90,7 +90,7 @@ export const ResumeSection = () => {
                                         <div className="text-gray-400 text-xs">User name</div>
                                         <div className="text-gray-400 text-xs">2h</div>
                                     </div>
-                                    <a href="javascript:void(0)" className="font-bold hover:text-yellow-800 hover:underline">Cross-platform and browser QA</a>
+                                    <a href="#" className="font-bold hover:text-yellow-800 hover:underline">Cross-platform and browser QA</a>
                                 </div>
 
                             </div>

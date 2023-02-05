@@ -5,7 +5,7 @@ import { DashboardSection } from "./sections"
 
 export const Dashboard = () => {
 
-    return <div className="relative bg-yellow-50 overflow-hidden h-screen flex flex-col">
+    return <div data-theme="emerald" className="relative bg-yellow-50 overflow-hidden h-screen flex flex-col">
         <Sidebar />
         <div className="flex flex-col justify-evenly">
             <NavBar />
