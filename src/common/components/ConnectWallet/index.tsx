@@ -5,7 +5,6 @@ export const ConnectWallet = () => {
     const { connectors, isLoading, connect, error, pendingConnector } = useConnect()
     const { isConnected } = useAccount()
 
-
     return <>
         {
             isConnected ?
