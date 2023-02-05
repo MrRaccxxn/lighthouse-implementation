@@ -20,7 +20,7 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
     fontFamily: {
-      sans: ['sans-serif'],
+      sans: ['Graphik', 'sans-serif'],
       serif: ['serif'],
     },
     extend: {
