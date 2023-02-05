@@ -1,3 +1,5 @@
+import { ContainerX } from '@/common/layout/Container';
+import { NavBar } from '@/common/layout/NavBar';
 import { useState } from 'react';
 import { IntroMessage } from './IntroMessage';
 import { RegisterSoulForm } from './RegisterSoulForm';
@@ -5,9 +7,12 @@ import { RegisterSoulForm } from './RegisterSoulForm';
 export const OnBoard = () => {
     const [showMessage, setShowMessage] = useState<boolean>(true)
 
-    return <div className="w-full h-full">
-        <div className="m-auto">
-            <div className="max-w-6xl w-full m-auto h-screen flex justify-center items-center">
+    return <>
+        <ContainerX>
+            <NavBar />
+        </ContainerX>
+        <div className="w-full h-screen flex flex-col justify-center items-center">
+            <div className="max-w-6xl w-full m-auto h-full flex justify-center items-center">
                 {
                     showMessage ?
                         <IntroMessage changePage={() => setShowMessage(false)} /> :
@@ -15,5 +20,5 @@ export const OnBoard = () => {
                 }
             </div>
         </div>
-    </div>
+    </>
 }
