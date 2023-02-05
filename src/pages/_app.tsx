@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <meta charSet="utf-8" />
       <title>Soul-Sci</title>
       <link rel="canonical" href="http://soulsci.com/" />
-      <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16" />
+      <link rel="icon" type="image/png" href="/assets/logo.png" sizes="8x8" />
     </Head>
     <WagmiConfig client={wagmiClient}>
       <Component {...pageProps} />
