@@ -46,7 +46,7 @@ export const RegisterPaper = () => {
                 const response = await createPaper(formData)
 
                 if (response?.status === 200) {
-
+                    setProjectSectionState(ProjectSectionStateType.MyProjects)
                 }
 
                 setIsUpdating(false)
@@ -61,6 +61,6 @@ export const RegisterPaper = () => {
 
     return <>
         {projectSectionState === ProjectSectionStateType.UploadMetadata && < UploadMetadata register={register} errors={errors} onSubmit={onSubmit} isSubmitting={isSubmitting} />}
-        {projectSectionState === ProjectSectionStateType.Mint && < MintPaper onSubmit={onSubmit} isUpdating={isUpdating}/>}
+        {projectSectionState === ProjectSectionStateType.Mint && < MintPaper onSubmit={onSubmit} isUpdating={isUpdating} />}
     </>
 }

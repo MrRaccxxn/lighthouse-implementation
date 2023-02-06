@@ -72,7 +72,7 @@ export const RegisterSoulForm = () => {
                         placeholder="youremail@example.com"
                         className="mb-2 w-full text-xl text-gray-700"
                         register={register}
-                        rules={{ required: 'You must enter your profession title.' }}
+                        rules={{ required: 'You must enter your profession title.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: "Invalid email address" } }}
                         errors={errors}
                     />
                 </div>

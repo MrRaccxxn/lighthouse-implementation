@@ -26,7 +26,7 @@ export const DropdownMenu = () => {
                         />
                     </div>
                 </div>
-                <div className="font-medium">
+                <div className="font-medium text-start">
                     <div className="text-gray-700">
                         {address?.slice(0, 5) + '...' + address?.slice(address.length - 5, address.length)}
                     </div>
@@ -40,7 +40,7 @@ export const DropdownMenu = () => {
             <li><Link href={'/'}>Home</Link></li>
             <li><Link href={'/dashboard'}>Dashboard</Link></li>
             <hr />
-            <li><div onClick={handleDisconnect}>Logout</div></li>
+            <li><div onClick={handleDisconnect}>Disconnect</div></li>
         </ul>
     </div>
 }

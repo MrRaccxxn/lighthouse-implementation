@@ -5,16 +5,6 @@ import { ProjectSectionContextInterface, ProjectSectionStateType } from "../../.
 import { ProjectBox } from "../../../components/ProjectBox";
 import { Loader } from "@/common/components/Loader";
 
-interface IProgress {
-    isUpdating: boolean;
-    progressPercentage: number;
-}
-
-interface IProgressData {
-    total: number;
-    uploaded: number;
-}
-
 export const MintPaper = ({ onSubmit, isUpdating }: { onSubmit: () => void, isUpdating: boolean }) => {
     const { setProjectSectionState, paper } = useContext(ProjectSectionContext) as ProjectSectionContextInterface
 
@@ -39,7 +29,7 @@ export const MintPaper = ({ onSubmit, isUpdating }: { onSubmit: () => void, isUp
                     <div className="flex flex-col items-center  w-full my-20">
                         <h2 className="py-3 mb-3 text-xl font-semibold">Preview of your paper</h2>
                         <div className="max-w-xl">
-                            <ProjectBox paper={paper} />
+                            <ProjectBox paper={paper} disableRedirect={true}/>
                         </div>
                     </div>
 

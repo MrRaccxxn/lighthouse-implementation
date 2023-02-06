@@ -5,6 +5,11 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: [
+      'gateway.lighthouse.storage',
+    ],
+  },
 }
 
 module.exports = nextConfig

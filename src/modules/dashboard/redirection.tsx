@@ -10,6 +10,7 @@ import { useAccount, useContractRead } from "wagmi";
 import { hexToDecimal } from "@/common/utils/parsing";
 import { SBTContractResponse } from "./types/models/SBT";
 import { getUser } from "@/common/services/models/user";
+import _ from "lodash";
 
 export const RedirectionDashboard = () => {
     const { requireOnboarding, setRequireOnboarding } = useContext(DashboardContext) as DashboardContextInterface;
@@ -19,8 +20,7 @@ export const RedirectionDashboard = () => {
     useEffect(() => {
         const getUserFetch = async () => {
             const response = await getUser({ userAddress: userAddress || '' })
-            console.log(response)
-            if (response?.data) {
+            if (!_.isEmpty(response?.data)) {
                 setRequireOnboarding(false)
             }
 

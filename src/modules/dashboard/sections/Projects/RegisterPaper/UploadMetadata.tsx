@@ -70,7 +70,7 @@ export const UploadMetadata = ({ register, errors, onSubmit, isSubmitting }: { r
                                 placeholder="Description"
                                 className="textarea card-bordered bg-transparent border-gray-200"
                                 rows={3}
-                                {...(register && register('description', { required: 'You must enter a description.' }))}
+                                {...(register && register('description', { required: 'You must enter a description.', pattern: { value: /^.{50,}$/, message: "Description must have at least 50 characters"} }))}
                             />
                             <ErrorMessage
                                 errors={errors}

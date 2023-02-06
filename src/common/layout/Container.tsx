@@ -10,7 +10,7 @@ export const Container = ({ children }: { children: React.ReactNode }) => {
 }
 
 export const ContainerX = ({ children }: { children: React.ReactNode }) => {
-    return <div className="max-w-7xl m-auto">
+    return <div className="max-w-7xl mx-auto">
         {children}
     </div>
 }
