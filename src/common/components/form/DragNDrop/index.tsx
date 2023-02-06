@@ -3,6 +3,7 @@ import _ from "lodash";
 import { useState } from "react";
 import { UseFormRegister } from "react-hook-form";
 import { AiFillCheckCircle } from 'react-icons/ai';
+import Image from "next/image";
 
 interface Props {
     className: string,
@@ -38,11 +39,11 @@ export const DragAndDrop = ({ register, inputName, className, label, helperText 
                         <p className="mb-2 text-md text-gray-700 font-semibold w-72 text-center" style={{ wordWrap: 'break-word' }}>{image || memoryImage[0]?.name}</p>
                         <AiFillCheckCircle color="green" className="h-8 w-8" />
                     </div> :
-                        <img
+                        <Image
                             alt={label}
                             src={image || URL?.createObjectURL(memoryImage[0])}
                             style={{ objectFit: 'contain' }}
-                            className={'w-full h-full'}
+                            fill
                         />
                     :
                     <div className="flex flex-col justify-center items-center pt-5 pb-6">

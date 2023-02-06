@@ -1,5 +1,5 @@
 import { Loader } from "@/common/components/Loader";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dashboard } from ".";
 import { DashboardContext } from "./context/DashboardContext";
 import { OnBoard } from "./sections/OnBoard";
@@ -9,27 +9,35 @@ import EditorAbi from 'constants/EditorAbi.json';
 import { useAccount, useContractRead } from "wagmi";
 import { hexToDecimal } from "@/common/utils/parsing";
 import { SBTContractResponse } from "./types/models/SBT";
+import { getUser } from "@/common/services/models/user";
 
 export const RedirectionDashboard = () => {
     const { requireOnboarding, setRequireOnboarding } = useContext(DashboardContext) as DashboardContextInterface;
     const { address: userAddress } = useAccount();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const { data, isLoading } = useContractRead({
-        address: `0x${networkMapping[3141].Editor.slice(2, networkMapping[3141].Editor.length)}`,
-        abi: EditorAbi,
-        functionName: 'getSbtCount',
-        args: [userAddress],
-    });
+    useEffect(() => {
+        const getUserFetch = async () => {
+            const response = await getUser({ userAddress: userAddress || '' })
+            console.log(response)
+            if (response?.data) {
+                setRequireOnboarding(false)
+            }
+
+            setIsLoading(false);
+        }
+
+        if (userAddress) {
+            getUserFetch();
+        }
+    })
 
     if (isLoading) return <div className="w-screen h-scree">
         <Loader fillScreen={true} />
     </div>
 
-    if (data && hexToDecimal(data as BigInt) === SBTContractResponse.hasSbt) setRequireOnboarding(false)
-
     return <>
-        {/* {!requireOnboarding && <Dashboard />} */}
-        {/* {requireOnboarding && <OnBoard />} */}
-        <Dashboard />
+        {!requireOnboarding && <Dashboard />}
+        {requireOnboarding && <OnBoard />}
     </>
 }

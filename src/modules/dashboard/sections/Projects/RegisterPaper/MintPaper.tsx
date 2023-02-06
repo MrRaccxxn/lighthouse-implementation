@@ -3,6 +3,7 @@ import lighthouse from '@lighthouse-web3/sdk';
 import { ProjectSectionContext } from "../../../context/ProjectSectionContext";
 import { ProjectSectionContextInterface, ProjectSectionStateType } from "../../../types/context/registerProjectFormContext";
 import { ProjectBox } from "../../../components/ProjectBox";
+import { Loader } from "@/common/components/Loader";
 
 interface IProgress {
     isUpdating: boolean;
@@ -14,14 +15,8 @@ interface IProgressData {
     uploaded: number;
 }
 
-export const MintPaper = () => {
+export const MintPaper = ({ onSubmit, isUpdating }: { onSubmit: () => void, isUpdating: boolean }) => {
     const { setProjectSectionState, paper } = useContext(ProjectSectionContext) as ProjectSectionContextInterface
-
-    const uploadToLighthouse = async () => {
-        console.log(paper?.paperFile[0])
-        const response = await lighthouse.upload(URL.createObjectURL(paper?.paperFile[0]), process.env.NEXT_PUBLIC_LIGHTHOUSE_API_KEY || '');
-        console.log('response from upload lighthouse', response)
-    }
 
     return <div className="ml-60 max-h-screen overflow-auto">
         <div className="px-6 py-8">
@@ -50,7 +45,14 @@ export const MintPaper = () => {
 
                     <div className="flex flex-row justify-between">
                         <button onClick={() => setProjectSectionState(ProjectSectionStateType.UploadMetadata)}>Back</button>
-                        <button onClick={uploadToLighthouse}>Upload Paper</button>
+                        <button onClick={onSubmit} disabled={isUpdating}>
+                            {
+                                isUpdating ?
+                                    <Loader />
+                                    :
+                                    <>Upload Paper</>
+                            }
+                        </button>
                     </div>
                 </div>
             </div>

@@ -5,57 +5,33 @@ import { DashboardContext } from "../../../context/DashboardContext";
 import { DashboardContextInterface } from "../../../types/context/dashboardContext";
 import networkMapping from 'constants/networkMapping.json';
 import EditorAbi from 'constants/EditorAbi.json';
-import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi";
+import { useAccount, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi";
 import { Loader } from "@/common/components/Loader";
-
-type ISoulForm = {
-    name: string;
-    professionalTitle: string;
-}
+import { IUserForm } from "@/common/@types/models/IUser";
+import { createUser } from "@/common/services/models/user";
 
 export const RegisterSoulForm = () => {
     const { setRequireOnboarding } = useContext(DashboardContext) as DashboardContextInterface;
-    const [tx, setTx] = useState<string>('');
-
-    const { config,
-        error: prepareError,
-        isError: isPrepareError,
-    } = usePrepareContractWrite({
-        address: `0x${networkMapping[3141].Editor.slice(2, networkMapping[3141].Editor.length)}`,
-        abi: EditorAbi,
-        functionName: 'mintID',
-        args: ["uri", "name", "profession", "mail"],
-        enabled: true
-    })
-    const { data: contractWriteData, error, writeAsync, isLoading, isError } = useContractWrite(config)
-
-    const { data: transactioData, status: statusTx, isLoading: isLoadingTx, refetch: refetchTransaction, isFetching } = useWaitForTransaction({
-        hash: tx !== '' ? `0x${tx.slice(2, tx.length)}` : '0x2',
-        enabled: tx !== '' ? true : false,
-        onSuccess(data) {
-            setRequireOnboarding(false)
-        },
-        onError(error) {
-            console.log(`Error ${error}`)
-        },
-    })
-    console.log(contractWriteData)
-    console.log(tx)
-    console.log(transactioData)
-
-    if (contractWriteData && tx === '') {
-        setTx(contractWriteData.hash)
-        refetchTransaction();
-    }
-
+    const { address } = useAccount();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<ISoulForm>();
+    } = useForm<IUserForm>();
 
-    const handleRegisterSoul = handleSubmit(async (data: ISoulForm) => {
-        await writeAsync?.()
+    const handleRegisterSoul = handleSubmit(async (data: IUserForm) => {
+        if (address) {
+            setIsLoading(true)
+            const user: IUserForm = { ...data, address }
+            const response = await createUser({ data: user })
+
+            if (response?.data?._id) {
+                setRequireOnboarding(false)
+            }
+
+            setIsLoading(false)
+        }
     })
 
     return <div className="w-full m-auto flex justify-center items-center">
@@ -64,7 +40,7 @@ export const RegisterSoulForm = () => {
             <p className="text-gray-500 text-center px-32">The information you provide in the form will be used to create a unique, soul-bound token. This token will securely store and hold the data you have provided, ensuring its integrity and accessibility.</p>
             <div className="flex flex-col justify-between w-full h-full items-center gap-16">
                 <div className="w-full px-12 ">
-                    <FormInput<ISoulForm>
+                    <FormInput<IUserForm>
                         id="name"
                         type="text"
                         name="name"
@@ -76,10 +52,10 @@ export const RegisterSoulForm = () => {
                         errors={errors}
                     />
 
-                    <FormInput<ISoulForm>
-                        id="professionalTitle"
+                    <FormInput<IUserForm>
+                        id="profession"
                         type="text"
-                        name="professionalTitle"
+                        name="profession"
                         label="Professional Title *"
                         placeholder="e.x. Doctor in Physics"
                         className="mb-2 w-full text-xl text-gray-700"
@@ -88,15 +64,21 @@ export const RegisterSoulForm = () => {
                         errors={errors}
                     />
 
-                    <div className="max-w-2xl text-red-500 whitespace-pre-wrap">
-                        {(isPrepareError || isError) && (
-                            <div>Error: {(prepareError || error)?.message}</div>
-                        )}
-                    </div>
+                    <FormInput<IUserForm>
+                        id="email"
+                        type="email"
+                        name="email"
+                        label="Email *"
+                        placeholder="youremail@example.com"
+                        className="mb-2 w-full text-xl text-gray-700"
+                        register={register}
+                        rules={{ required: 'You must enter your profession title.' }}
+                        errors={errors}
+                    />
                 </div>
-                <button onClick={handleRegisterSoul} disabled={isLoading || isLoadingTx || isFetching || !writeAsync} className='btn bg-transparent hover:bg-gray-200 text-gray-800 w-fit' style={{ cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🥳</text></svg>")  16 0,  auto` }}>
+                <button onClick={handleRegisterSoul} disabled={isLoading} className='btn bg-transparent hover:bg-gray-200 text-gray-800 w-fit' style={{ cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🥳</text></svg>")  16 0,  auto` }}>
                     {
-                        isLoading || isLoadingTx || isFetching || !writeAsync ? <Loader /> :
+                        isLoading ? <Loader /> :
                             <>Mint my soul token!</>
                     }
                 </button>
