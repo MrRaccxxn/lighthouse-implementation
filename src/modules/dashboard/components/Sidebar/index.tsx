@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Link from "next/link";
 import { useContext } from "react";
 import { DashboardContext } from "../../context/DashboardContext";
 import { DashboardContextInterface } from "../../types/context/dashboardContext";
@@ -11,7 +12,7 @@ export const Sidebar = () => {
         <div className="flex flex-col justify-between h-full">
             <div className="flex-grow">
                 <div className="px-4 py-6 text-center border-b">
-                    <h1 className="text-xl font-bold leading-none"><span className="text-yellow-700">SoulSci</span> App</h1>
+                    <Link href={'/'}><h1 className="text-xl font-bold leading-none"><span className="text-yellow-700">Soul-Sci</span> App</h1></Link>
                 </div>
                 <div className="p-4">
                     <ul className="space-y-1">

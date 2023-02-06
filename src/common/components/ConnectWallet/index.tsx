@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { DropdownMenu } from "./DropdownMenu";
 
