@@ -2,6 +2,7 @@ require('dotenv').config()
 const lighthouse = require('@lighthouse-web3/sdk');
 const User = require('../db/models/user')
 const Paper = require('../db/models/paper')
+const { sendMail } = require('../util/email');
 
 const registerPaper = async (req, res) => {
     try {
@@ -22,11 +23,12 @@ const registerPaper = async (req, res) => {
         });
 
         await newPaper.save().then(async (response) => {
-            await User.findOneAndUpdate({ address: ownerAddress },
+            const ownerUser = await User.findOneAndUpdate({ address: ownerAddress },
                 { $push: { papers: { paperId: newPaper._id.toString() } } },
                 { returnOriginal: false }
             )
 
+            await sendMail({ sendTo: ownerUser.email, title, author, fileUrl: `${process.env.LIGHTHOUSE_BASE_URL}/${paperResponse.data.Hash}` })
             res.status(200).send(response)
         })
     } catch (error) {
