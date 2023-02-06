@@ -11,11 +11,6 @@ export const ProductDescription = () => {
           <div className="flex-grow pl-6">
             <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Store your PDF for Max Security</h2>
             <p className="leading-relaxed text-base">Once you create a credential token, you could propose documents you&apos;d like to share and keep. Note that your proposed PDF will get stored on the blockchain once it is approved by the community.</p>
-            <a className="mt-3 text-indigo-500 inline-flex items-center">Learn More
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
           </div>
         </div>
         <div className="p-4 md:w-1/3 flex">
@@ -27,13 +22,8 @@ export const ProductDescription = () => {
             </svg>
           </div>
           <div className="flex-grow pl-6">
-            <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Vote and Mange DAO Together </h2>
+            <h2 className="text-gray-900 text-lg title-font font-medium mb-2">Vote and Mange DAO Together (Soon)</h2>
             <p className="leading-relaxed text-base">Once you create your credential token, you could vote for the proposal PDFs you believe is worth storing and preserving for the future.</p>
-            <a className="mt-3 text-indigo-500 inline-flex items-center">Learn More
-              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-            </a>
           </div>
         </div>
       </div>

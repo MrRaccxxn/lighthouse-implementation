@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BsGithub, BsTwitter } from 'react-icons/bs';
+import { BsGithub, BsTwitter, BsLinkedin } from 'react-icons/bs';
 
 interface ITeamMember {
     name: string;
     role: string;
     socialGitHub: string;
-    socialTwitter: string;
+    socialTwitter?: string;
+    socialLinkedin?: string;
 }
 
 const teamData: ITeamMember[] = [
@@ -14,31 +15,34 @@ const teamData: ITeamMember[] = [
         name: 'Yuichi Okuhama',
         role: 'Project Management',
         socialGitHub: 'https://github.com/yuichi-9621',
-        socialTwitter: '',
+        socialTwitter: 'https://twitter.com/0xYuichi',
+        socialLinkedin: 'https://www.linkedin.com/in/yuichiokuhama/'
     },
     {
         name: 'Joseph Mello',
         role: 'Solidity Engineer',
         socialGitHub: 'https://github.com/MelloJ650',
-        socialTwitter: '',
+        socialTwitter: 'https://twitter.com/JMellowDev',
+        socialLinkedin: 'https://www.linkedin.com/in/josephmellocs/'
     }
     ,
     {
         name: 'Aryton Paredes',
         role: 'Frontend Engineer',
         socialGitHub: 'https://github.com/MrRaccxxn',
-        socialTwitter: '',
+        socialTwitter: 'https://twitter.com/MrRaccxxn',
+        socialLinkedin: 'https://www.linkedin.com/in/ayrtonparedes/'
     }, {
         name: 'Sandra Ashipala',
         role: 'Frontend Engineer',
         socialGitHub: 'https://github.com/sandramsc',
-        socialTwitter: '',
+        socialLinkedin: 'https://linkedin.com/in/sandraashipala'
     },
     {
         name: 'Adarsh Chandran',
         role: 'Solidity Engineer',
-        socialGitHub: '',
-        socialTwitter: 'https://github.com/adarshsc2000',
+        socialGitHub: 'https://github.com/adarshsc2000',
+        socialLinkedin: 'https://www.linkedin.com/in/adarshsc2000/',
     }
 ];
 
@@ -75,8 +79,9 @@ export const Team = () => {
                                     <p className="text-gray-500 leading-relaxed font-light break-all">{teamMember.role}</p>
                                 </div>
                                 <div className="flex flex-row justify-center items-center gap-2 py-2">
+                                    {teamMember.socialLinkedin && <Link href={teamMember.socialLinkedin} target='_blank'><BsLinkedin className="text-gray-600 hover:text-gray-400" /></Link>}
                                     <Link href={teamMember.socialGitHub} target='_blank'><BsGithub className="text-gray-600 hover:text-gray-400" /></Link>
-                                    <Link href={'#'}><BsTwitter className="text-gray-600 hover:text-gray-400" /></Link>
+                                    {teamMember.socialTwitter && <Link href={teamMember.socialTwitter} target='_blank'><BsTwitter className="text-gray-600 hover:text-gray-400" /></Link>}
                                 </div>
                             </div>
                         </div>

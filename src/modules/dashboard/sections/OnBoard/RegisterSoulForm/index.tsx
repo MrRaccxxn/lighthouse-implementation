@@ -21,23 +21,32 @@ export const RegisterSoulForm = () => {
         error: prepareError,
         isError: isPrepareError,
     } = usePrepareContractWrite({
-        address: `0x${networkMapping[3141].Editor[0].slice(2, networkMapping[3141].Editor[0].length)}`,
+        address: `0x${networkMapping[3141].Editor.slice(2, networkMapping[3141].Editor.length)}`,
         abi: EditorAbi,
         functionName: 'mintID',
-        args: ["s"],
+        args: ["uri", "name", "profession", "mail"],
+        enabled: true
     })
     const { data: contractWriteData, error, writeAsync, isLoading, isError } = useContractWrite(config)
 
     const { data: transactioData, status: statusTx, isLoading: isLoadingTx, refetch: refetchTransaction, isFetching } = useWaitForTransaction({
-        hash: tx !== '' ? `0x${tx.slice(2, tx.length)}` : '0x',
-        enabled: false,
+        hash: tx !== '' ? `0x${tx.slice(2, tx.length)}` : '0x2',
+        enabled: tx !== '' ? true : false,
         onSuccess(data) {
-            alert(`Success ${data}`)
+            setRequireOnboarding(false)
         },
         onError(error) {
-            alert(`Error ${error}`)
+            console.log(`Error ${error}`)
         },
     })
+    console.log(contractWriteData)
+    console.log(tx)
+    console.log(transactioData)
+
+    if (contractWriteData && tx === '') {
+        setTx(contractWriteData.hash)
+        refetchTransaction();
+    }
 
     const {
         register,
@@ -47,15 +56,6 @@ export const RegisterSoulForm = () => {
 
     const handleRegisterSoul = handleSubmit(async (data: ISoulForm) => {
         await writeAsync?.()
-        console.log(contractWriteData)
-
-        if (isError) {
-            console.log('error')
-        }
-        if (contractWriteData) {
-            setTx(contractWriteData.hash)
-            refetchTransaction();
-        }
     })
 
     return <div className="w-full m-auto flex justify-center items-center">

@@ -16,25 +16,11 @@ interface IProgressData {
 
 export const MintPaper = () => {
     const { setProjectSectionState, paper } = useContext(ProjectSectionContext) as ProjectSectionContextInterface
-    const [progress, setProgress] = useState<IProgress>({
-        isUpdating: false,
-        progressPercentage: 0
-    });
 
-    const progressCallback = (progressData: IProgressData) => {
-        const progress: number = (progressData.total / progressData.uploaded)
-
-        let percentageDone = 100 - Math.round(progress);
-
-        setProgress(prev => ({
-            ...prev,
-            progressPercentage: percentageDone
-        }))
-    };
-
-    const uploadToLighthouse = async (e: any) => {
-        const output = await lighthouse.upload(e, process.env.REACT_APP_LIGHTHOUSE_API_KEY || '', progressCallback);
-        console.log('response from upload lighthouse', output)
+    const uploadToLighthouse = async () => {
+        console.log(paper?.paperFile[0])
+        const response = await lighthouse.upload(URL.createObjectURL(paper?.paperFile[0]), process.env.NEXT_PUBLIC_LIGHTHOUSE_API_KEY || '');
+        console.log('response from upload lighthouse', response)
     }
 
     return <div className="ml-60 max-h-screen overflow-auto">
@@ -62,8 +48,10 @@ export const MintPaper = () => {
                         </div>
                     </div>
 
-                    <button onClick={() => setProjectSectionState(ProjectSectionStateType.UploadMetadata)}>Back</button>
-
+                    <div className="flex flex-row justify-between">
+                        <button onClick={() => setProjectSectionState(ProjectSectionStateType.UploadMetadata)}>Back</button>
+                        <button onClick={uploadToLighthouse}>Upload Paper</button>
+                    </div>
                 </div>
             </div>
         </div>
